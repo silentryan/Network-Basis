@@ -5,18 +5,31 @@
 
 # Azure Storage accout only support NFS and SMB protocol
 
-# Recongize the current Distributor
+# Manually read the inforation and descride the distributor
 
+# echo -n "Please choose RPM(remote packet manager) system: 0-apt, 1-yum:"
+# read distributor
+
+# Auto recongize the current Distributor
 if grep -i -q -E "Ubuntu|Debian" /etc/os-release ; then
     # apt
-    sudo apt update
     distri=0
 else
     # yum
-    yum update
     distri=1
 fi
 
+# if you sure about the current distirbutor
+
+# read -p "Please choose RPM(remote packet manager) system: 0-apt, 1-yum:"
+
+
 # According to Distributor to download mathched TCPDUMP
+if [ $distri -eq 0 ]; then
+    sudo apt update
+    sudo apt -y install tshark
+else
+    sudo yum install tshark
+fi
 
 # Use NFS protocol to bring the file from Linux to storage account. 
