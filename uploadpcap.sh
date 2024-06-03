@@ -32,4 +32,8 @@ else
     sudo yum install tshark
 fi
 
-# Use NFS protocol to bring the file from Linux to storage account. 
+# Use SMB 3.0 protocol to bring the file from Linux to storage account. 
+
+# Check if current system install samba
+whereis samba
+
